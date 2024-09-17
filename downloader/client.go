@@ -3,9 +3,9 @@ package downloader
 import (
 	"archive/zip"
 	"context"
-	"dingidan-douyin/pkg/encrypt"
 	"fmt"
 	"github.com/go-kratos/kratos/v2/log"
+	"github.com/williamtse/gopkg/encrypt"
 	"io"
 	"net/http"
 	"os"
@@ -14,7 +14,6 @@ import (
 )
 
 type Client struct {
-	log *log.Helper
 	cd  Conf
 	dir string
 }
@@ -25,8 +24,7 @@ type Conf struct {
 
 func NewClient(cd Conf, logger log.Logger) *Client {
 	return &Client{
-		log: log.NewHelper(logger),
-		cd:  cd,
+		cd: cd,
 	}
 }
 
