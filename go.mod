@@ -1,4 +1,4 @@
-module gopkg
+module github.com/williamtse/gopkg
 
 go 1.23.0
 
