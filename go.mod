@@ -5,7 +5,6 @@ go 1.23.0
 toolchain go1.23.1
 
 require (
-	entgo.io/ent v0.14.1
 	github.com/go-kratos/kratos/contrib/config/consul/v2 v2.0.0-20240909031108-908e6256a9f6
 	github.com/go-kratos/kratos/contrib/config/nacos/v2 v2.0.0-20240909031108-908e6256a9f6
 	github.com/go-kratos/kratos/v2 v2.8.0
@@ -21,7 +20,6 @@ require (
 	go.opentelemetry.io/otel v1.30.0
 	go.opentelemetry.io/otel/exporters/jaeger v1.17.0
 	go.opentelemetry.io/otel/sdk v1.30.0
-	go.opentelemetry.io/otel/trace v1.30.0
 	golang.org/x/crypto v0.27.0
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
 )
@@ -75,6 +73,7 @@ require (
 	github.com/swaggo/files v0.0.0-20220610200504-28940afbdbfe // indirect
 	github.com/swaggo/swag v1.8.1 // indirect
 	go.opentelemetry.io/otel/metric v1.30.0 // indirect
+	go.opentelemetry.io/otel/trace v1.30.0 // indirect
 	go.uber.org/atomic v1.6.0 // indirect
 	go.uber.org/multierr v1.5.0 // indirect
 	go.uber.org/zap v1.15.0 // indirect

@@ -2,6 +2,8 @@ package email
 
 import (
 	"gopkg.in/gomail.v2"
+	"html/template"
+	"strings"
 )
 
 type Client struct {
@@ -25,6 +27,23 @@ func NewClient(conf Conf) *Client {
 		fromName:    conf.Name,
 		d:           d,
 	}
+}
+
+func (e *Client) RenderTemplate(tmplStr string, pageVariables any) (string, error) {
+	// 创建模板并解析 HTML 字符串
+	tmpl, err := template.New("verify_code").Parse(tmplStr)
+	if err != nil {
+		return "", err
+	}
+	var output strings.Builder
+	// 执行模板并将结果写入 strings.Builder
+	err = tmpl.Execute(&output, pageVariables)
+	if err != nil {
+		return "", err
+	}
+	renderedTemplate := output.String()
+	// 输出结果
+	return renderedTemplate, nil
 }
 
 func (e *Client) Send(toAddress string, subject string, tmplStr string) error {
