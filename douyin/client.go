@@ -135,13 +135,14 @@ func (d *Client) GetUserFans(openId string, accessToken string, days int64) (int
 		AccessToken: accessToken,
 		DataType:    days,
 	}
+
 	rs, err := d.manager.DataExternalUserFans(opts)
 	if err != nil {
 		return 0, err
 	}
 	errMsg := rs.Data.Error()
 	if rs.Data.ErrorCode != 0 {
-		return 0, fmt.Errorf(errMsg)
+		return 0, fmt.Errorf("%s:%s", errMsg, rs.Extra.SubDescrition)
 	}
 	if len(rs.Data.ResultList) == 0 {
 		return 0, err

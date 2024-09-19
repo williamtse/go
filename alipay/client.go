@@ -15,6 +15,7 @@ type PaymentParams struct {
 	TradeNo    string
 	Amount     float32
 	TimeExpire string
+	Subject    string
 }
 
 type Payment interface {
@@ -100,7 +101,7 @@ func (c *Client) PagePay(ctx context.Context, args PaymentParams) (string, error
 	mb := gopay.BodyMap{
 		"out_trade_no": args.TradeNo,
 		"total_amount": args.Amount,
-		"subject":      "测试订单",
+		"subject":      args.Subject,
 		"product_code": "FAST_INSTANT_TRADE_PAY",
 		"time_expire":  args.TimeExpire,
 	}
@@ -119,6 +120,8 @@ func (c *Client) ParseNotifyData(r *http.Request) ([]byte, error) {
 		return nil, err
 	}
 	// 支付宝异步通知验签（公钥证书模式）
+	log.Println("回调参数：", string(payload))
+	log.Println("签名验证，证书：", c.Config.PublicCert)
 	ok, err := alipay.VerifySignWithCert(c.Config.PublicCert, notifyReq)
 	if err != nil {
 		xlog.Error(err)
@@ -127,6 +130,6 @@ func (c *Client) ParseNotifyData(r *http.Request) ([]byte, error) {
 	if !ok {
 		return nil, fmt.Errorf("验签失败")
 	}
-
+	log.Println("签名验证成功！")
 	return payload, nil
 }
